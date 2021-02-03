@@ -32,7 +32,11 @@ public class PathService {
         if (loginMember != null) {
             complimentaryAge = ComplimentaryAge.getAgeGroup(loginMember.getAge());
         }
-        MetroNavigator metroNavigator = new MetroNavigator(lines, stationDao.findById(startStationId), stationDao.findById(destStationId), complimentaryAge);
+        MetroNavigator metroNavigator = new MetroNavigator(lines,
+                stationDao.findById(startStationId),
+                stationDao.findById(destStationId),
+                complimentaryAge);
+        
         return new PathResponse(metroNavigator.getShortestPath().stream()
                 .map(StationResponse::of)
                 .collect(Collectors.toList()),
